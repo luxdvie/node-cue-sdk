@@ -147,6 +147,7 @@ class CueSDK {
 			'CorsairGetLedIdForKeyName': [CorsairLedId, ['char']],
 			'CorsairRequestControl': ['bool', [CorsairAccessMode]],
 			'CorsairPerformProtocolHandshake': [CorsairProtocolDetails, []],
+			'CorsairSetLayerPriority': ['bool', ['int']],
 			'CorsairGetLastError': [CorsairError, []]
 		});
 
@@ -378,6 +379,21 @@ class CueSDK {
 		this.CueSDKLib._dl.close();
 		this.CueSDKLib = {};
 	}
+
+	/** 
+	 * Renew the keyboard by assigning a normal priority. http://forum.corsair.com/v3/showthread.php?t=153701
+	*/
+	renew() {
+		this.CueSDKLib.CorsairSetLayerPriority(127);
+	}
+
+	/** 
+	 * Release the keyboard by setting a low priority. http://forum.corsair.com/v3/showthread.php?t=153701
+	*/
+	release() {
+		this.CueSDKLib.CorsairSetLayerPriority(120);
+	}
+
 	/**
 		* Create a CorsairLedColor.
 		* @private
